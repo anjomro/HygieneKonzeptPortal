@@ -18,6 +18,7 @@ The recommended and easiest way of deploying the OpenSoundStream Server is to us
 
 #### Additional Parameters (that might be useful)
 - `-e DJANGO_HOST=my-domain.tld` Add my-domain.tld to the allowed host if exposing the Port directly (not recommend!).  The recommended way is to use a reverse proxy The allowed ports include `localhost` and `127.0.0.1` by default.
+- `-e DJANGO_DEBUG=1` Enables Debug modus, useful for debugging, don't use in production!
 
 #### Reverse Proxy Config for Apache
 
