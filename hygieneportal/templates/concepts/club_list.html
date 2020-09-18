@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="card-deck">
+                {% for club in object_list %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ club.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                {% if club.concepts.count > 1 %}
+                                    Hygienekonzepte
+                                {% else %}
+                                    Hygienekonzept
+                                {% endif %}
+                            </h6>
+                            <ul class="list-group list-group-flush">
+                                {% for concept in club.concepts.all %}
+                                    <li class="list-group-item">
+                                        <a class="btn btn-outline-primary" href="{% url 'concept' concept_id=concept.id concept_name=concept.id %}-{{ club.name | slugify }}.pdf" target="_blank" title="Hygienekonzept {{ club }}">
+                                            {{ concept.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-0">Verantwortlich:</p>
+                            {% for contact in club.contacts.all %}
+                                <a href="{{ contact.mail_url }}"
+                                   class="card-link" title="Email an {{ contact.name }}">{{ contact.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
