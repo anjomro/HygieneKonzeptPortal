@@ -1,8 +1,8 @@
 from django.db import models
 from django.db.models import fields, CharField, QuerySet
 import base64
-
 # Create your models here.
+
 
 class Contact(models.Model):
     name = CharField(max_length=100)
@@ -33,5 +33,14 @@ class Club(models.Model):
     name = CharField(max_length=100)
     contacts = models.ManyToManyField(Contact)
     concepts = models.ManyToManyField(Concept)
+    access_count = fields.IntegerField(default=0)
+
     def __str__(self):
         return self.name
+
+    def access(self):
+        self.access_count += 1
+        self.save()
+
+    class Meta:
+        ordering = ['-access_count']

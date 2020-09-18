@@ -5,7 +5,8 @@
         <div class="row">
             <div class="card-deck">
                 {% for club in object_list %}
-                    <div class="card">
+                    <div class="col" style="margin-bottom: 30px;">
+                        <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ club.name }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">
@@ -32,6 +33,7 @@
                                    class="card-link" title="Email an {{ contact.name }}">{{ contact.name }}</a>
                             {% endfor %}
                         </div>
+                    </div>
                     </div>
                 {% endfor %}
             </div>

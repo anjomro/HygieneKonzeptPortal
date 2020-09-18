@@ -19,4 +19,6 @@ class ClubView(ListView):
 
 def concept_view(request, concept_id:int, concept_name:str):
     concept: Concept = get_object_or_404(Concept, id=concept_id)
+    for club in concept.club_set.all():
+        club.access()
     return FileResponse(concept.pdf.open())
