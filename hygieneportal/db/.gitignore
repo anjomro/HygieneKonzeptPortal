@@ -2,3 +2,4 @@
 *
 #excluding this gitignore itself.
 !.gitignore
+!docs

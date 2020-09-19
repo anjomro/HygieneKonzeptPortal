@@ -149,5 +149,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_ROOT = BASE_DIR / "docs/"
+MEDIA_ROOT = BASE_DIR / "db/docs/"
 MEDIA_URL = "docs/"
