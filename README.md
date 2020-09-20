@@ -1,13 +1,25 @@
 # HygieneKonzeptPortal (Hygiene Plan Portal)
-This project is meant to provide an easy way of announcing multiple hygiene plans publicly. New Plans can be added via the Django admin interface (/admin).
+This project is meant to provide an easy way of announcing multiple hygiene plans publicly. New plans can be added via the Django admin interface (/admin).
 
 ## Deployment
 The recommended and easiest way of deploying the OpenSoundStream Server is to use the available docker container.
+- Start Docker Container:
+```
+docker run -d -p 8109:8000 \
+ --mount source=hygiene-db,target=/portal/db \
+ -e DJANGO_HOST=my-domain.tld \
+ --name hygieneportal \
+ anjomro/hygieneportal
+```
 
-    docker run -d -p 8109:8000 \
-        --mount source=hygiene-db,target=/portal/db \
-         --name hygieneportal \
-         anjomro/hygieneportal
+- Create Superuser for administration:
+```
+docker exec \
+ -it hygieneportal \
+ sh -c "python manage.py createsuperuser"
+```
+- Add hygiene concepts using admin interface (my-domain.tld/admin)
+- Each Club needs at least one contact person and one concept
 
 ##### Parameter Explanation:
 - `-d` Run the server in detached mode (-> in Background)
