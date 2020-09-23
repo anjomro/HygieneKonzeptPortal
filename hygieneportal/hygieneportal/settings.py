@@ -9,14 +9,32 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import base64
 import os
 import secrets
 from pathlib import Path
 
 
+def envvar(name: str, default: str = "") -> str:
+    if name in os.environ:
+        return os.environ[name]
+    else:
+        return default
 
-TITLE = "HygienePortal Bezirk Stuttgart"
 
+TITLE = envvar("title", "HygienePortal")
+
+NAME = envvar("name")
+ADRESS = envvar("adress")
+EMAIL= envvar("email")
+EMAIL_LINK = ""
+if EMAIL != "":
+    mailto = "mailto:{}".format(EMAIL)
+    encoded_mail = base64.b64encode(mailto.encode()).decode()
+    splittedmail = EMAIL.split("@")
+    if len(splittedmail) == 2:
+        EMAIL = "{}ҩ{}".format(splittedmail[0], splittedmail[1])
+        EMAIL_LINK = "javascript:window.location.href=atob('{}')".format(encoded_mail)
 
 
 
@@ -91,6 +109,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'concepts.context_preprocessors.env_vars'
             ],
         },
     },

@@ -1,5 +1,8 @@
 # HygieneKonzeptPortal (Hygiene Plan Portal)
-This project is meant to provide an easy way of announcing multiple hygiene plans publicly. New plans can be added via the Django admin interface (/admin).
+This project is meant to provide an easy way of announcing multiple hygiene plans publicly. New plans can be added via the Django admin interface (`/admin`).
+
+This project is licensed under the European Union Public License 1.2. 
+The portal features a legal notice in German Language that may be used, however no liability is given according to the EUPL.
 
 ## Deployment
 The recommended and easiest way of deploying the OpenSoundStream Server is to use the available docker container.
@@ -8,6 +11,10 @@ The recommended and easiest way of deploying the OpenSoundStream Server is to us
 docker run -d -p 8109:8000 \
  --mount source=hygiene-db,target=/portal/db \
  -e DJANGO_HOST=my-domain.tld \
+ -e title="HygienePortal from ..." \
+ -e name="Title<br />Name of the responsible Person" \
+ -e adress="Street 1<br/> 12345 City" \
+ -e email="contact@example.com" \
  --name hygieneportal \
  anjomro/hygieneportal
 ```
@@ -27,8 +34,13 @@ docker exec \
 - `--mount source=hygiene-db,target=/portal/db \` A docker volume is used to persist the sqlite-database: If the container is deleted and instanciated again the Volume and therefore teh Database is used again.
 - `--name hygieneportal` Name the container 'hygieneportal' for future reference
 - `anjomro/hygieneportal` Specifies to use the anjomro/hygieneportal image.
-
+-
 #### Additional Parameters (that might be useful)
+- `-e title="HygienePortal from ..."` Title of the whole portal
+- `-e name="Title<br />Name of the responsible Person"` Name of the person responsible for the portal
+- `-e adress="Street 1<br/> 12345 City"` Adress of the responsible person
+- `-e email="contact@example.com"` Email of the responsible person (Gets protected against spambots!)
+
 - `-e DJANGO_HOST=my-domain.tld` Add my-domain.tld to the allowed host if exposing the Port directly (not recommend!).  The recommended way is to use a reverse proxy The allowed ports include `localhost` and `127.0.0.1` by default.
 - `-e DJANGO_DEBUG=1` Enables Debug modus, useful for debugging, don't use in production!
 

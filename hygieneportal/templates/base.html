@@ -75,14 +75,17 @@
             </div>
             <div id="impressum" class="col-lg-12" style="display: none;">
                 <h2>Impressum</h2>
-                <p>Ressortleiter Jugend Einzelsport
-                    Anton Mrosek<br/>
-                    Forststraße 112<br/>
-                    70193 Stuttgart
+                <p>{{ name | safe }}
+                    {{ adress | safe}}
                 </p>
                 <h3>Kontakt:</h3>
-                <a href="#" class="mail-inside">konzeptportal<i class="at-zeichen">(at)</i>anjomro.de</a><br>
+                <a href="{{ email_link}}">{{ email }}</a><br>
                 <p>&nbsp;</p>
+                <h3>Verantwortlichkeit für die Hygienekonzepte</h3>
+                <p>
+                    Die Betreiber dieses Portals sind nicht für die Hygienekonzepte verantwortlich. Für die Konzepte sind alleine die gekennzeichneten angegebenen Personen verantwortlich.
+                    Der Betreiber übernimmt keine Haftung für die Richtigkeit, Aktualität und eventuelle Unzulänglichkeiten der bereitgestellten Dokumente.
+                </p>
                 <h3>Widerspruch Werbe-Mails</h3>
                 <p>Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur Übersendung von
                     nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit widersprochen.
@@ -160,10 +163,9 @@
                     </p>
                     <hr>
                     <p>
-                        Anton Mrosek<br>
-                        Forststraße 112<br>
-                        D 70193 Stuttgart<br>
-                        <a href="#" class="mail-inside">konzeptportal<i class="at-zeichen">(at)</i>anjomro.de</a><br>
+                        {{ name | safe }}<br/>
+                        {{ adress | safe }}
+                        <a href="{{ email_link }}">{{ email }}</a><br>
 
                     </p>
                     <hr>
@@ -1024,7 +1026,7 @@
                         Sollten Sie noch Fragen oder Bedenken zum Datenschutz haben, so wenden
                         Sie sich bitte an unseren Datenschutzbeauftragten:
                     <p>
-                        <a href="#" class="mail-inside">konzeptportal<i class="at-zeichen">(at)</i>anjomro.de</a><br>
+                        <a href="{{ email_link }}">{{ email }}</a><br>
                     </p>
                     </p>
                     <p>
@@ -1067,14 +1069,6 @@
             $("#close").css("display", "none");
         }
     }
-
-
-    $(document).ready(function () {
-        $(".at-zeichen").html("@");
-        var link = $(".mail-inside");
-        var domain = "anjomro.de"
-        link.attr("href", "mailto:konzeptportal@" + domain);
-    });
 </script>
 
 
